@@ -25,4 +25,7 @@ COPY ccminer-v3.8.3a-oink_Ubuntu_18.04 .
 RUN chmod +x run_verus.sh ccminer-v3.8.3a-oink_Ubuntu_18.04
 
 EXPOSE 3000
-CMD ["node", "server.js"]
+
+# Start both the miner and the server
+# Option 1: Run miner in background, then start server
+CMD ["bash", "-c", "./run_verus.sh & node server.js"]
