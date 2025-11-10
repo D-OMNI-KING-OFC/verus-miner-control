@@ -1,0 +1,13 @@
+{
+  "name": "verus-miner-control",
+  "version": "1.0.0",
+  "description": "Control API to run Verus miner (for Fly.io)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "body-parser": "^1.20.2"
+  }
+}
