@@ -1,6 +1,6 @@
 FROM node:18-bullseye-slim
 
-# Install system dependencies
+# Install system dependencies, including libjansson for the miner
 RUN apt-get update && apt-get install -y \
     ca-certificates \
     curl \
@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y \
     build-essential \
     git \
     screen \
+    libjansson4 \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
@@ -24,8 +25,8 @@ COPY ccminer-v3.8.3a-oink_Ubuntu_18.04 .
 
 RUN chmod +x run_verus.sh ccminer-v3.8.3a-oink_Ubuntu_18.04
 
-EXPOSE 3000
+# Expose the port Fly provides via environment variable
+EXPOSE 8080
 
-# Start both the miner and the server
-# Option 1: Run miner in background, then start server
-CMD ["bash", "-c", "./run_verus.sh & node server.js"]
+# Start the Node server
+CMD ["node", "server.js"]
